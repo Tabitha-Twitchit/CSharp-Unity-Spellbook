@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/*This is 1 part of a pair of tank/car controllers for a local 2 player game where each player runs a separate car
+ * simultaneously on a split screen using different keybindings on the same keyboard*/
+public class Player1Control : MonoBehaviour
+{
+    private float speed = 20.0f;
+    private float turnSpeed = 25.0f;
+    private float horizontalInput;
+    private float forwardInput;
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        //this is where we get player input
+        horizontalInput = Input.GetAxis("Horizontal");
+        forwardInput = Input.GetAxis("Vertical");
+
+        //moves the vehicle forward
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
+
+        //Note you can add "* forwardInput" after "* horizontalInput" to this last method to turn it into more of a car controller,
+        //I.e. it needs to also move forwrad to be able to turn.
+        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+
+    }
+}
